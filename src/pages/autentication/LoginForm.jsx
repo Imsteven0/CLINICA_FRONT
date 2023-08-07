@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useAuth} from '../../hooks/useAuth'
+import {Toastify} from '../../utilities/Toastify';
 import {Navigate} from "react-router-dom";
 import {loginFetch} from '../../services/autentication'
 
@@ -18,6 +19,8 @@ export default function LoginForm() {
                 const jsonData = await response.json();
                 login(jsonData.token)
             }
+        } else {
+            Toastify('error', 'Complete los campos');
         }
     }
 
@@ -89,7 +92,6 @@ export default function LoginForm() {
                                 </button>
                             </div>
                         </div>
-
                         <p className="mt-10 text-center text-sm text-gray-500">
                             No estas resgistrado?{' '}
                             <a className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
