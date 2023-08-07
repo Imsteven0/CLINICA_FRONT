@@ -1,6 +1,17 @@
 import * as React from "react";
+import {useAuth} from "../../hooks/useAuth";
+import {Toastify} from "../../utilities/Toastify";
+import {Navigate} from "react-router-dom";
 
 export default function RegisterForm() {
+
+    const {user} = useAuth()
+
+    if (user) {
+        Toastify('info', `Ya posees una sección activa!`);
+        return <Navigate to="/"/>
+    }
+
     return (
         <div className="flex w-full h-screen">
             <div className="w-full flex items-center justify-center">

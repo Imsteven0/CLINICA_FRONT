@@ -9,7 +9,10 @@ export default function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, SetPassword] = useState('');
 
-    if (user) return <Navigate to="/"/>
+    if (user) {
+        Toastify('info', `Ya posees una sección activa!`);
+        return <Navigate to="/"/>
+    }
 
     const sendToLogin = async () => {
         if (email !== '' && password !== '') {
