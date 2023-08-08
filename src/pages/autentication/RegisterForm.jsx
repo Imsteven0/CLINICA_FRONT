@@ -37,6 +37,8 @@ export default function RegisterForm() {
             const jsonData = await response.json();
             login(jsonData.token)
             Toastify('success', `Te has registrado correctamente!`);
+        }else{
+            Toastify('error', `Ha ocurrido un error!`);
         }
     }
 
