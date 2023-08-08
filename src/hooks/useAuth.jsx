@@ -1,7 +1,8 @@
 import {createContext, useContext, useMemo} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useLocalStorage} from './useLocalStorage'
-import {getExpiresIn, getFullName, getIdUser} from '../../../Portafolio-Steven/src/helpers/decoding'
+import {getExpiresIn, getFullName, getIdUser} from '../helpers/decoding' //Portafolio-Steven/src/helpers/decoding
+import {Toastify} from '../utilities/Toastify';
 
 const AuthContext = createContext()
 
@@ -20,13 +21,16 @@ export const AuthProvider = ({children}) => {
         setIdUser(getIdUser(token))
         setExpiresIn(getExpiresIn(token))
         navigate('/', {replace: true})
+        Toastify('success', `Se ha iniciado sesión correctamente!`);
     }
 
     const logout = () => {
         setToken(null)
         setUser(null)
+        setIdUser(null)
         setExpiresIn(null)
         navigate('/login', {replace: true})
+        Toastify('success', 'Se ha cerrado la sesión');
     }
 
     const value = useMemo(
@@ -34,6 +38,7 @@ export const AuthProvider = ({children}) => {
             token,
             user,
             idUser,
+            setIdUser,
             expiresIn,
             login,
             logout,

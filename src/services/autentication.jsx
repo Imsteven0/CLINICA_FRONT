@@ -1,4 +1,4 @@
-const BASEURL = 'http://localhost:8000';
+const BASEURL = 'http://localhost:5000';
 
 /* END-POINT que permite al usuario registrarse en el sistema. */
 export const loginFetch = async (values) => {
