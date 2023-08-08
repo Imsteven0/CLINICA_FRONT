@@ -27,6 +27,7 @@ export const AuthProvider = ({children}) => {
     const logout = () => {
         setToken(null)
         setUser(null)
+        setIdUser(null)
         setExpiresIn(null)
         navigate('/login', {replace: true})
         Toastify('success', 'Se ha cerrado la sesión');
@@ -37,6 +38,7 @@ export const AuthProvider = ({children}) => {
             token,
             user,
             idUser,
+            setIdUser,
             expiresIn,
             login,
             logout,

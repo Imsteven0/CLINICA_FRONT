@@ -1,8 +1,8 @@
-const BASEURL = 'http://localhost:8000';
+const BASEURL = 'http://localhost:5000';
 
 /* END-POINT que permite guardar un nuevo mensaje. */
-export const newMessage = async (values) => {
-    return await fetch(BASEURL + '/Message/newMessage', {
+export const updateUser = async (values) => {
+    return await fetch(BASEURL + '/User/UpdateUser', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -12,8 +12,8 @@ export const newMessage = async (values) => {
 }
 
 /* Obtener todos los chats/messages/usersData. */
-export const getConversationByIdUser = async (idConversation) => {
-    return await fetch(BASEURL + '/Conversation/listConversationById/' + idConversation, {
+export const getUserById = async (idConversation) => {
+    return await fetch(BASEURL + '/User/GetUserById/' + idConversation, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
