@@ -6,7 +6,7 @@ import {useAuth} from "../hooks/useAuth";
 
 const navigation = [
     {name: 'Usuario', href: '/', current: true},
-    {name: 'Citas', href: '/quotes', current: false},
+    {name: 'Contacto', href: '/quotes', current: false},
     {name: 'Examenes', href: '/exams', current: false},
     {name: 'Resultados', href: '/results', current: false},
 ]

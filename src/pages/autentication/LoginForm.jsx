@@ -5,7 +5,7 @@ import {Navigate} from "react-router-dom";
 import {loginFetch} from '../../services/autentication'
 
 export default function LoginForm() {
-    const {user, login} = useAuth()
+    const {user, login,idUser} = useAuth() //variable donde estan los parametros del usuario. idUser ese es el id del usuario
     const [email, setEmail] = useState('');
     const [password, SetPassword] = useState('');
 
