@@ -1,4 +1,4 @@
-const BASEURL = 'http://localhost:5000';
+const BASEURL = 'https://different-fly-pantyhose.cyclic.app/';
 
 /* END-POINT que permite al usuario registrarse en el sistema. */
 export const loginFetch = async (values) => {
