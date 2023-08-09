@@ -1,12 +1,12 @@
 import * as React from "react";
-import {useAuth} from "../../hooks/useAuth";
+import {useAuth} from "../../hooks/useAuth"; // y la ruta
 import {Toastify} from "../../utilities/Toastify";
 import {Navigate} from "react-router-dom";
 import {register} from '../../services/autentication'
 
 export default function RegisterForm() {
 
-    const {user, login} = useAuth()
+    const {user, login ,idUser} = useAuth() // este ese idUser lo podes llamar en cualquier componente digamos.
 
     if (user) {
         Toastify('info', `Ya posees una sección activa!`);
@@ -32,9 +32,10 @@ export default function RegisterForm() {
         }
 
         let response = await register(data);
-        console.log(response)
+        console.log(response)       
         if (response.status === 200) {
             const jsonData = await response.json();
+            console.log(jsonData)
             login(jsonData.token)
             Toastify('success', `Te has registrado correctamente!`);
         }else{
