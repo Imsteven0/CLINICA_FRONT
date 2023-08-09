@@ -11,7 +11,7 @@ export const updateUser = async (values) => {
     });
 }
 
-/* Obtener todos los chats/messages/usersData. */
+/* Obtener el usuario por el id. */
 export const getUserById = async (idConversation) => {
     return await fetch(BASEURL + '/User/GetUserById/' + idConversation, {
         method: 'GET',

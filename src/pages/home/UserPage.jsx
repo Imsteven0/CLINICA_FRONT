@@ -9,7 +9,7 @@ export default function LoginForm() {
 
     const [isUpdate, setIsUpdate] = useState(false);
 
-    const {user, idUser, setIdUser} = useAuth()
+    const {user, idUser} = useAuth()
 
     const hadbleUpdate = async () => {
         try {
@@ -18,6 +18,29 @@ export default function LoginForm() {
             const apellido = document.getElementById('last-name').value
             const pais = document.getElementById('country').value
             const fechaNacimiento = document.getElementById('date').value
+            const imageElement = document.getElementById('large_size');
+
+            // Función para convertir una imagen en base64
+            function convertImageToBase64(file) {
+                return new Promise((resolve, reject) => {
+                    // Verifica que el parámetro sea un objeto File
+                    if (!(file instanceof File)) {
+
+                    } else {
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            resolve(event.target.result);
+                        };
+                        reader.onerror = function (error) {
+                            reject(error);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+
+            const imageData = await convertImageToBase64(imageElement.files[0]);
 
             const data = {
                 _id: idUser,
@@ -25,7 +48,8 @@ export default function LoginForm() {
                 name: nombre,
                 lastname: apellido,
                 country: pais,
-                dateOfBirth: fechaNacimiento
+                dateOfBirth: fechaNacimiento,
+                image: imageData
             }
 
             let response = await updateUser(data);
@@ -34,12 +58,22 @@ export default function LoginForm() {
                 const jsonData = await response.json();
                 setIsUpdate(false);
                 Toastify('success', 'Se ha actualizado la información correctamente!');
+                clearForm();
             }
 
         } catch (e) {
             console.log(e)
+            clearForm();
             Toastify('error', 'Ha ocurrido un error inesperado, por favor intente más tarde.');
         }
+    }
+
+    const clearForm = () => {
+        document.getElementById('cedula').value = ''
+        document.getElementById('first-name').value = ''
+        document.getElementById('last-name').value = ''
+        document.getElementById('country').value = ''
+        document.getElementById('date').value = ''
     }
 
     return (
@@ -136,7 +170,15 @@ export default function LoginForm() {
                                 </div>
                             </div>
 
-                            <div className="sm:col-span-3">
+                            <div className="sm:col-span-3 pt-1.5">
+                                <label className="block mb-2 text-sm font-medium text-gray-900"
+                                       htmlFor="large_size">Cambiar imagen de perfil</label>
+                                <input
+                                    className="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                                    id="large_size" type="file"/>
+                            </div>
+
+                            <div className="sm:col-span-6">
                                 <div className="mt-6 flex items-center justify-end gap-x-6">
                                     <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
                                         Cancelar
@@ -153,19 +195,9 @@ export default function LoginForm() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex-col w-2/4 pt-10">
-                        <div className="sm:flex sm:justify-center gap-4">
-                            <div>
-                                <img
-                                    className="inline-block sm:h-30 sm:w-30 h-40 w-40 rounded-[40px] ring-2 ring-white"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt=""
-                                />
-                            </div>
-                            <UserCard isUpdate={isUpdate}
-                                      setIsUpdate={setIsUpdate}/>
-                        </div>
-                    </div>
+                    <UserCard isUpdate={isUpdate}
+                              setIsUpdate={setIsUpdate}/>
+
                 </div>
 
 
