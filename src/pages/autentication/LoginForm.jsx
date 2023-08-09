@@ -5,7 +5,7 @@ import {Navigate} from "react-router-dom";
 import {loginFetch} from '../../services/autentication'
 
 export default function LoginForm() {
-    const {user, login,idUser} = useAuth() //variable donde estan los parametros del usuario. idUser ese es el id del usuario
+    const {user, login, idUser} = useAuth() //variable donde estan los parametros del usuario. idUser ese es el id del usuario
     const [email, setEmail] = useState('');
     const [password, SetPassword] = useState('');
 
@@ -21,6 +21,8 @@ export default function LoginForm() {
             if (response.status === 200) {
                 const jsonData = await response.json();
                 login(jsonData.token)
+            } else {
+                Toastify('error', 'Verifica tus credenciales.');
             }
         } else {
             Toastify('error', 'Complete los campos');

@@ -10,3 +10,23 @@ export const updateContact = async (values) => {
         body: JSON.stringify(values)
     });
 }
+
+
+export const getUsersContactsByIdUser = async (idContact) => {
+    return await fetch(BASEURL + '/Contact/GetContactById/' + idContact, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
+
+
+export const deleteUserContact = async (idContact) => {
+    return await fetch(BASEURL + '/Contact/deleteContactById/' + idContact, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
